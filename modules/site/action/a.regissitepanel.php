@@ -12,6 +12,10 @@ if ($site_uid)
 	$ISID = getDbData($Table['s_site'],"uid<>".$site_uid." and id='".$id."'",'*');
 	if ($ISID['uid']) getLink('','',_LANG('a7001','site'),'');
 
+	// 사이트코드가 없을 경우는 usescode를 0(false)로 셋팅하고, 있을 경우 usescode를 1로 셋팅한다.
+	if (empty($id)){ $usescode = 0;
+	}else { $usescode = 1; };
+
 	$QVAL = "id='$id',name='$name',title='$title',layout='$layout',startpage='$startpage',m_layout='$m_layout',m_startpage='$m_startpage',open='$open'";
 	getDbUpdate($table['s_site'],$QVAL,'uid='.$site_uid);
 
