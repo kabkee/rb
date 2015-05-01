@@ -30,7 +30,7 @@
 
 <!----------------------------------------------------------------------------
 @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+--------------------------------------------------------------------------- -->
 
 <div id="_modal_header" class="hidden">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -51,12 +51,16 @@ var bootmsg = '<div class="media"><div class="media-body" style="font-size:12px;
 	bootmsg+= '</div></div>';
 
 $('.rb-confirm').on('click', function() {
-	bootbox.confirm(bootmsg, function(result){
-		document.LayoutLogForm.idpwsave.checked = result;
-	});
-	$('.bootbox .media-heading').css({'font-weight':'bold','margin-bottom':'8px'});
-	$('.bootbox .modal-footer').css({'margin-top':'0','background-color':'#f2f2f2'});
-	$('.bootbox .modal-footer .btn-default').addClass('pull-left');
+    // 체크 해제 시에는 다시 물어볼 필요가 없음.
+    // There's no need to ask when being 'checked = true' since, user intend to change it to 'disabled'
+    if( $(this).is(':checked') ){
+        bootbox.confirm(bootmsg, function(result){
+            document.LayoutLogForm.idpwsave.checked = result;
+        });
+        $('.bootbox .media-heading').css({'font-weight':'bold','margin-bottom':'8px'});
+        $('.bootbox .modal-footer').css({'margin-top':'0','background-color':'#f2f2f2'});
+        $('.bootbox .modal-footer .btn-default').addClass('pull-left');
+    }
 });
 function layoutLogCheck(f)
 {
